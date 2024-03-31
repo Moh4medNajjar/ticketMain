@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 
 class UserProfile(models.Model):
     id = models.AutoField(primary_key=True)
@@ -13,7 +12,7 @@ class UserProfile(models.Model):
     # booked_events = models.ManyToManyField('Event', related_name='booked_users')
     is_verified = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    
+
     # Add MFA fields
     mfa_enabled = models.BooleanField(default=False)
     mfa_secret_key = models.CharField(max_length=100, blank=True, null=True)
