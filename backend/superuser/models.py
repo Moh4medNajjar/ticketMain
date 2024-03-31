@@ -1,5 +1,7 @@
+import logging
 from django.db import models
 from .models import UserProfile
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 class SuperUser(UserProfile):

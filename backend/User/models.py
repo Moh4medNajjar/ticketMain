@@ -9,10 +9,10 @@ class UserProfile(models.Model):
     phone = models.CharField(max_length=15)
     email = models.EmailField(unique=True)
     governate = models.CharField(max_length=100)
-    # booked_events = models.ManyToManyField('Event', related_name='booked_users')
+    attended_events = models.ManyToManyField('Event', through='Attendance', related_name='attendees')
     is_verified = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-
+    
     # Add MFA fields
     mfa_enabled = models.BooleanField(default=False)
     mfa_secret_key = models.CharField(max_length=100, blank=True, null=True)
