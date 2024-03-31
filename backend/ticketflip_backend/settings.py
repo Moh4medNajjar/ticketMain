@@ -40,14 +40,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'User'
-    'SuperUser', 
-    'Event', 
-    'Ticket', 
-    'Booking', 
-    'Feedback', 
-    'Rating', 
-    'Cart', 
-    'Payment'
+    'superuser', 
+    'event', 
+    'ticket', 
+    'booking', 
+    'feedback', 
+    'rating', 
+    'cart', 
+    'Payment',
 
 ]
 
