@@ -1,0 +1,53 @@
+<!-- <ion-content>
+  <div class="login-container">
+    <div class="login-rectangle">
+      <h2>LOGIN</h2>
+      <div>
+<ion-label position="floating" id="email-label">Email</ion-label>
+        <ion-input type="email" name="email"></ion-input>
+      </div>
+      <div>
+        <ion-label position="floating" id="password-label">Password</ion-label>
+        <ion-input type="password" name="password"></ion-input>
+      </div>
+      <div>
+        <ion-label id="pass-forgot">Forgot my password</ion-label>
+        </div>
+      <ion-button expand="block" color="#6236FF" name="login">Log in</ion-button>
+      <ion-label id="sign-up">Don't have an account?</ion-label><ion-label id="sign-up-2">Sign Up</ion-label>
+      <div class="bordures-container">
+        <div (click)="PageSelected = true" [class]="{'bordure1': true, 'couleur-active': PageSelected}" class="button"></div>
+        <div (click)="PageSelected = false" [class]="{'bordure2': true, 'couleur-active': !PageSelected}" class="button"></div>
+      </div>
+
+
+    </div>
+  </div>
+</ion-content>
+ -->
+
+ <div class="container-fluid p-3 pt-5" style="height:100%; color:white; overflow-y:scroll">
+  <div class="register py-4">
+    <h1 class="text-center mb-3">Login</h1>
+
+    <div class="inputs">
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Create a strong password">
+        </div>
+        <button class="button d-flex justify-content-center align-items-center py-1 px-2 ">Log in</button>
+        <p style="text-align: center; margin-top:18px; font-size:15px">Don't have an account?<a href="" style="text-decoration:none; color:#6236FF; font-weight: 700;margin-left:3px;font-size: 15px;">Register</a></p>
+      </form>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center">
+      <div class="t1"></div>
+      <div class="t2"></div>
+    </div>
+  </div>
+</div>
