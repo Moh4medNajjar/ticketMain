@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'User'
+    'user',
     'superuser', 
     'event', 
     'ticket', 
@@ -47,8 +47,7 @@ INSTALLED_APPS = [
     'feedback', 
     'rating', 
     'cart', 
-    'Payment',
-
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -89,7 +88,7 @@ WSGI_APPLICATION = 'ticketflip_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'Ticketflip',  # Name of your MongoDB database
+        'NAME': 'ticketflip',  # Name of your MongoDB database
         'ENFORCE_SCHEMA': False,  # Optional: Set to True if you want to enforce schema validation
         'CLIENT': {
             'host': 'localhost',  # MongoDB host address
