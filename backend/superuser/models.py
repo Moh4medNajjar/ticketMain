@@ -1,10 +1,10 @@
 import logging
 from django.db import models
-from .models import UserProfile
+from user.models import User
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-class SuperUser(UserProfile):
+class SuperUser(User):
     def approve_event(self, event):
         event.status = "approved"
         event.save()

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'User'
+    'user',
     'superuser', 
     'event', 
     'ticket', 
@@ -47,8 +47,7 @@ INSTALLED_APPS = [
     'feedback', 
     'rating', 
     'cart', 
-    'Payment',
-
+    'payment',
 ]
 
 MIDDLEWARE = [

@@ -14,8 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+import feedback.views
+from rating.views import rating_detail, rating_create, rating_update, rating_delete, rating_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('feedback/', feedback.views.feedback_list, name='feedback_list'),
+    path('feedback/create/', feedback.views.feedback_create, name='feedback_create'),
+    path('feedback/<int:feedback_id>/', feedback.views.feedback_detail, name='feedback_detail'),
+    path('feedback/<int:feedback_id>/update/', feedback.views.feedback_update, name='feedback_update'),
+    path('feedback/<int:feedback_id>/delete/', feedback.views.feedback_delete, name='feedback_delete'),
+    path('event/<int:event_id>/ratings/', rating_list, name='rating_list'),
+    path('event/<int:event_id>/rating/<int:rating_id>/', rating_detail, name='rating_detail'),
+    path('event/<int:event_id>/rating/create/', rating_create, name='rating_create'),
+    path('event/<int:event_id>/rating/<int:rating_id>/update/', rating_update, name='rating_update'),
+    path('event/<int:event_id>/rating/<int:rating_id>/delete/', rating_delete, name='rating_delete'),
+    path('cart/', include('cart.urls')),
 ]

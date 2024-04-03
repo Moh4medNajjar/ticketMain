@@ -1,19 +1,10 @@
 from django.db import models
 
-class UserProfile(models.Model):
-    id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=100)
-    age = models.PositiveIntegerField()
-    password = models.CharField(max_length=100)
-    field_of_interest = models.CharField(max_length=100)
-    phone = models.CharField(max_length=15)
+class User(models.Model):
+    age = models.PositiveIntegerField(null=True)
+    field_of_interest = models.CharField(max_length=100, null=True)
+    phone = models.CharField(max_length=20, null=True)
     email = models.EmailField(unique=True)
-    governate = models.CharField(max_length=100)
-    attended_events = models.ManyToManyField('Event', through='Attendance', related_name='attendees')
+    governorate = models.CharField(max_length=100, null=True)
     is_verified = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
-    
-    # Add MFA fields
-    mfa_enabled = models.BooleanField(default=False)
-    mfa_secret_key = models.CharField(max_length=100, blank=True, null=True)
-
+    is_admin = models.BooleanField(default=False)
