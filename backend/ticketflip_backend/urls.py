@@ -13,9 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
+from user.views import UserListCreateAPIView, UserRetrieveUpdateDestroyAPIView
 from django.urls import path
+from event import views as event_views
+from booking import views as booking_views
+from ticket import views as ticket_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('api/users', UserListCreateAPIView.as_view(), name='user-list-create'),
+    path('api/users/<int:pk>', UserRetrieveUpdateDestroyAPIView.as_view(), name='user-retrieve-update-destroy'),
+    path('events/', event_views.event_list, name='event_list'),
+    path('events/<int:pk>/', event_views.event_detail, name='event_detail'),
+    path('bookings/', booking_views.booking_list, name='booking_list'),
+    path('bookings/<int:pk>/', booking_views.booking_detail, name='booking_detail'),
+    path('tickets/', ticket_views.ticket_list, name='ticket_list'),
+    path('tickets/<int:pk>/', ticket_views.ticket_detail, name='ticket_detail'),
 ]
+
+
+
+

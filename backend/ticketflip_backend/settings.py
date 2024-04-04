@@ -88,11 +88,11 @@ WSGI_APPLICATION = 'ticketflip_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'ticketflip',  # Name of your MongoDB database
-        'ENFORCE_SCHEMA': False,  # Optional: Set to True if you want to enforce schema validation
+        'NAME': 'ticketflip',  
+        'ENFORCE_SCHEMA': False,  
         'CLIENT': {
-            'host': 'localhost',  # MongoDB host address
-            'port': 27017,        # MongoDB port
+            'host': 'localhost',  
+            'port': 27017,        
         }
     }
 }
