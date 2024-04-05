@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'ticketflip_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'ticketflip',  
+        'NAME': 'Ticketflip',  
         'ENFORCE_SCHEMA': False,  
         'CLIENT': {
             'host': 'localhost',  

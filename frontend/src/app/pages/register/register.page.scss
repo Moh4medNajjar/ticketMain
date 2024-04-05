@@ -171,7 +171,7 @@
   width: 97%;
   background: rgba(255, 255, 255, 0.244);
 box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 10px );
+backdrop-filter: blur( 5px );
 -webkit-backdrop-filter: blur( 10px);
 border-radius: 10px;
 border: 1px solid rgba( 255, 255, 255, 0.18 );
@@ -209,3 +209,16 @@ input{
   background-color: #dad7e4;
   margin-top: 20px;
 }
+::-webkit-input-placeholder {
+  color: black; /* Change placeholder color here */
+}
+.text-danger {
+  color: #ff4d4d; /* Red color */
+  font-weight: bold; /* Make the text bold */
+  background-color: rgba(255, 0, 0, 0.1); /* Light red background */
+  border: 1px solid #ff4d4d; /* Red border */
+  padding: 8px; /* Add padding for better visibility */
+  border-radius: 4px; /* Add border radius for smoother edges */
+}
+
+

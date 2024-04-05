@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from user.views import UserListCreateAPIView, UserRetrieveUpdateDestroyAPIView
+from user.views import UserListCreateAPIView, UserRetrieveUpdateDestroyAPIView,UserRegisterAPIView,UserLoginAPIView,UserStatusAPIView
 from django.urls import path
 from event import views as event_views
 from booking import views as booking_views
@@ -27,9 +27,13 @@ from feedback import views as feedback_views
 from django.urls import path, include
 from rating.views import rating_detail, rating_create, rating_update, rating_delete, rating_list
 
+
 urlpatterns = [
     path('api/users', UserListCreateAPIView.as_view(), name='user-list-create'),
     path('api/users/<int:pk>', UserRetrieveUpdateDestroyAPIView.as_view(), name='user-retrieve-update-destroy'),
+    path('api/auth/register/', UserRegisterAPIView.as_view(), name='user-register'),
+    path('api/auth/login/', UserLoginAPIView.as_view(), name='user-login'),
+    path('api/auth/user/status/', UserStatusAPIView.as_view(), name='user_status'),
     path('events/', event_views.event_list, name='event_list'),
     path('events/<int:pk>/', event_views.event_detail, name='event_detail'),
     path('bookings/', booking_views.booking_list, name='booking_list'),
