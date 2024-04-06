@@ -34,6 +34,11 @@ const routes: Routes = [
     path: 'search',
     loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
   },
+  {
+    path: 'featuredevents',
+    loadChildren: () => import('./pages/featuredevents/featuredevents.module').then( m => m.FeaturedeventsPageModule)
+  },
+
 
 ];
 
