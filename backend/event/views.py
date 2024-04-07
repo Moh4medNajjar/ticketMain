@@ -10,9 +10,15 @@ from .serializers import EventSerializer
 @csrf_exempt
 def event_list(request):
     if request.method == 'GET':
-        events = Event.objects.all()
+        category = request.GET.get('category')
+        if category:
+            events = Event.objects.filter(category=category)
+        else:
+            events = Event.objects.all()
+
         serialized_events = EventSerializer(events, many=True)
         return JsonResponse(serialized_events.data, safe=False)
+
     elif request.method == 'POST':
         event_data = JSONParser().parse(request)
         serialized_event = EventSerializer(data=event_data)

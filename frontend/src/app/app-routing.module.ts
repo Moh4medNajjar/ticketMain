@@ -38,6 +38,38 @@ const routes: Routes = [
     path: 'featuredevents',
     loadChildren: () => import('./pages/featuredevents/featuredevents.module').then( m => m.FeaturedeventsPageModule)
   },
+  {
+    path: 'categories/movies',
+    loadChildren: () => import('./categories/movies/movies.module').then( m => m.MoviesPageModule)
+  },
+  {
+    path: 'categories/games',
+    loadChildren: () => import('./categories/games/games.module').then( m => m.GamesPageModule)
+  },
+  {
+    path: 'categories/parties',
+    loadChildren: () => import('./categories/parties/parties.module').then( m => m.PartiesPageModule)
+  },
+  {
+    path: 'categories/art',
+    loadChildren: () => import('./categories/art/art.module').then( m => m.ArtPageModule)
+  },
+  {
+    path: 'categories/meet',
+    loadChildren: () => import('./categories/meets/meets.module').then( m => m.MeetsPageModule)
+  },
+  {
+    path: 'categories/music',
+    loadChildren: () => import('./categories/music/music.module').then( m => m.MusicPageModule)
+  },
+  {
+    path: 'categories/education',
+    loadChildren: () => import('./categories/education/education.module').then( m => m.EducationPageModule)
+  },
+
+
+
+
 
 
 ];

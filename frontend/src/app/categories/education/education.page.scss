@@ -58,7 +58,8 @@ ion-searchbar{
   flex-direction: column;
   justify-content: space-between;
   margin: 0;
-  min-width: 49%;
+  margin-bottom: 6px;
+  max-width: 48%;
   background-size: cover;
   min-height: 100px;
   aspect-ratio: 16 / 9
@@ -75,35 +76,9 @@ ion-searchbar{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  overflow-x:scroll;
-  gap:6px;
-  scroll-behavior: smooth;
-}
-.category{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #505050;
-  border-radius: 10px;
-  padding: 14px 8px;
-  width: 100%;
-  aspect-ratio: 1;
-}
-.category span{
-  font-size: 12px;
-  font-weight: 700;
-  margin-top: 4px;
-}
-.category i{
-  font-size: 24px;
-}
-.categories-container{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap:8px
+  flex-wrap: wrap;
+  gap:8px;
+  margin-bottom:30px
 }
 
-
-/********************************************/
+/*******************************************************/

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { EventService } from 'src/app/services/event.service';
 
 @Component({
@@ -9,7 +9,6 @@ import { EventService } from 'src/app/services/event.service';
 export class HomePagePage implements OnInit {
 
   events: any[] = [];
-
   constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
@@ -29,6 +28,19 @@ export class HomePagePage implements OnInit {
       );
   }
 
-  
+  @ViewChild('featuredContainer') featuredContainer!: ElementRef;
+
+  scrollStep = 200; // Number of pixels to scroll per click
+
+
+
+
+  scroll(direction: number): void {
+    const container = this.featuredContainer.nativeElement;
+    const scrollAmount = direction * this.scrollStep;
+    container.scrollLeft += scrollAmount;
+  }
+
+
 
 }

@@ -8,10 +8,17 @@ import { Observable } from 'rxjs';
 export class EventService {
 
   private eventsUrl = 'http://localhost:8000/events/';
+  private apiUrl = 'http://localhost:8000/events/';
+
 
   constructor(private http: HttpClient) { }
 
   getEvents(): Observable<any[]> {
     return this.http.get<any[]>(this.eventsUrl);
+  }
+
+  getEventsByCategory(category: string): Observable<any[]> {
+    const url = `${this.apiUrl}?category=${category}`;
+    return this.http.get<any[]>(url);
   }
 }

@@ -15,69 +15,73 @@
   <p class="fs-6" style="font-weight: 300;"><i class="fa-solid fa-location-dot me-2 fs-6"></i> Monastir, Tunisia</p>
 
 
-  <!-- <ion-searchbar class="p-0" animated="true" placeholder="Looking for an event?"></ion-searchbar> -->
-  <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-  </form>
+  <ion-searchbar class="p-0" animated="true" placeholder="Looking for an event?"></ion-searchbar>
 <!-------------------------------------------------------------------------------------------------->
   <div class="featured-section mt-5">
     <div class="d-flex justify-content-between align-items-center">
       <h3 class="mb-3 fs-2">Featured events</h3>
       <i class="fa fa-chevron-right" routerLink="/featuredevents"></i>
     </div>
-  <div class="featured-container">
+    <div class="featured-container">
 
-
-  <!-- Container for featured events with horizontal scrolling -->
-  <div class="featured-container">
-    <!-- Loop through the events and display them horizontally -->
-    <div *ngFor="let event of events" class="featured-event" [style.background-image]="'url(\'../../../assets/ev' + (event.id % 2 + 1) + '.png\')'">
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="catg"><span>{{ event.category }}</span></div>
-        <div class="icon-container">
-          <i class="fa fa-heart"></i>
+      <div class="featured-event" style="background-image: url('../../../assets/ev1.png')">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="catg"><span>Concert</span></div>
+          <div class="icon-container">
+            <i class="fa fa-heart"></i>
+          </div>
+        </div>
+        <div class="bot-card">
+          <p class="m-0">Royale Concert Hall</p>
+          <span>20Th June 2024</span>
         </div>
       </div>
-      <div class="bot-card">
-        <p class="m-0">{{ event.title }}</p>
-        <span>{{ event.date | date:'dd MMMM yyyy' }}</span>
+
+      <div class="featured-event" style="background-image: url('../../../assets/ev2.png')">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="catg"><span>Concert</span></div>
+          <div class="icon-container">
+            <i class="fa fa-heart"></i>
+          </div>
+        </div>
+        <div class="bot-card">
+          <p class="m-0">Royale Concert Hall</p>
+          <span>20Th June 2024</span>
+        </div>
       </div>
+
     </div>
-  </div>
-
-</div>
-
   </div>
 <!----------------------------------------------------------------------------------------------->
   <div class="category-section mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h3 class="fs-2">Categories</h3>
+    <div class="d-flex justify-content-between align-items-center">
+      <h3 class="mb-3 fs-2">Categories</h3>
       <i class="fa fa-chevron-right" routerLink="/search"></i>
     </div>
 
     <div class="categories-container">
 
-      <div class="category">
+      <div class="category" routerLink="/categories/movies">
         <i class="fa-solid fa-couch"></i>
         <span>Movies</span>
       </div>
 
-      <div class="category">
+      <div class="category" routerLink="/categories/games">
         <i class="fa-solid fa-trophy"></i>
         <span>Games</span>
       </div>
 
-      <div class="category">
+      <div class="category" routerLink="/categories/parties">
         <i class="fa-solid fa-gift"></i>
         <span>Parties</span>
       </div>
 
-      <div class="category">
+      <div class="category" routerLink="/categories/art">
         <i class="fa-solid fa-masks-theater"></i>
         <span>Art</span>
       </div>
 
-      <div class="category">
+      <div class="category" routerLink="/categories/meet">
         <i class="fa-solid fa-headset"></i>
         <span>Meet</span>
       </div>
@@ -85,7 +89,7 @@
     </div>
   </div>
 <!--------------------------------------------------------------------------------------------->
-  <div class="events-for-you-section mt-5">
+  <div class="events-for-you-section mt-5" style="margin-bottom:60px">
     <div class="d-flex justify-content-between align-items-center">
       <h3 class="mb-3 fs-2">Your booked events</h3>
       <i class="fa fa-chevron-right"></i>
