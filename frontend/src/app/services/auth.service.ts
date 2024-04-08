@@ -11,7 +11,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(credentials: { username: string, password: string }): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}login/`, credentials);
+    return this.http.post<any>('http://localhost:8000/api/auth/login', credentials);
   }
 
   register(userData: any): Observable<any> {
@@ -21,7 +21,7 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}logout/`, {});
   }
-  
+
   getUserStatus(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}user/status/`);
   }
