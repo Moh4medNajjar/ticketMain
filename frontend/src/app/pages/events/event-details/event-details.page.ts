@@ -17,7 +17,8 @@ export class EventDetailsPage implements OnInit {
   ticketsLeft!: number;
   addToCartButtonClicked: boolean = false;
   addToWishlistButtonClicked: boolean = false;
-
+  showMessage: boolean = false;
+  message_displayed!: string
   constructor(private activatedRoute: ActivatedRoute, private eventService: EventService) { }
 
   ngOnInit(): void {
@@ -57,8 +58,29 @@ export class EventDetailsPage implements OnInit {
     this.addToCartButtonClicked = !this.addToCartButtonClicked;
   }
 
-  addToWishlistClicked() {
+  toggleWishlist() {
+    // Toggle the addToWishlistButtonClicked flag
     this.addToWishlistButtonClicked = !this.addToWishlistButtonClicked;
+    if (this.addToWishlistButtonClicked==true)
+      this.message_displayed = "Added to wishlist!"
+    else
+      this.message_displayed = "Removed from wishlist!"
+
+    // Show message "Added to wishlist!" for 2 seconds
+    this.showMessage = true;
+    setTimeout(() => {
+      this.showMessage = false;
+    }, 2000);
+  }
+
+  getColor(): string {
+    if (this.foundEvent && this.foundEvent.status === 'upcoming') {
+      return '#45d81cd4'; // Set background color to green for 'upcoming'
+    } else if (this.foundEvent && this.foundEvent.status === 'finished') {
+      return '#ff0257d4'; // Set background color to red for 'finished'
+    } else {
+      return '#45d81cd4'; // Default background color (transparent)
+    }
   }
 
 
