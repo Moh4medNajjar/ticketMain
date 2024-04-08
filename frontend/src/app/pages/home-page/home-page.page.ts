@@ -1,18 +1,20 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
-
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.page.html',
   styleUrls: ['./home-page.page.scss'],
+  providers: [UserService]
 })
 export class HomePagePage implements OnInit {
 
   events: any[] = [];
-  constructor(private eventService: EventService, private router:Router) { }
-
+  constructor(private eventService: EventService, private router:Router, public UserService: UserService) { }
+  public userId = this.UserService.getUserDataFromToken();
   ngOnInit(): void {
+    console.log('User ID:', this.userId);
     this.fetchEvents();
   }
 
