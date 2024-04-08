@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { EventDetailsPage } from './pages/events/event-details/event-details.page';
 
 const routes: Routes = [
   {
@@ -66,6 +67,9 @@ const routes: Routes = [
     path: 'categories/education',
     loadChildren: () => import('./categories/education/education.module').then( m => m.EducationPageModule)
   },
+  { path: 'event-details/:eventId', component: EventDetailsPage } // Add route for event-details with eventId parameter
+
+
 
 
 

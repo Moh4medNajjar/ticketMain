@@ -21,4 +21,9 @@ export class EventService {
     const url = `${this.apiUrl}?category=${category}`;
     return this.http.get<any[]>(url);
   }
+
+  getEventDetails(eventId: number): Observable<any> {
+    const url = `${this.apiUrl}${eventId}`;
+    return this.http.get<any>(url);
+  }
 }

@@ -8,9 +8,11 @@ import { FeaturedeventsPageRoutingModule } from './featuredevents-routing.module
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { FeaturedeventsPage } from './featuredevents.page';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
+    HttpClientModule,
     CommonModule,
     FormsModule,
     IonicModule,

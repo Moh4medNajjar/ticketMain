@@ -27,11 +27,18 @@ def event_list(request):
             return JsonResponse(serialized_event.data, status=201)
         return JsonResponse(serialized_event.errors, status=400)
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.parsers import JSONParser
+from .models import Event
+from .serializers import EventSerializer
+
 @csrf_exempt
 def event_detail(request, pk):
     try:
         event = Event.objects.get(pk=pk)
-    except Event.DoesNotExist:
+    except ObjectDoesNotExist:
         return JsonResponse({'error': 'Event not found'}, status=404)
 
     if request.method == 'GET':
@@ -39,13 +46,20 @@ def event_detail(request, pk):
         return JsonResponse(serialized_event.data)
 
     elif request.method == 'PUT':
-        event_data = JSONParser().parse(request)
-        serialized_event = EventSerializer(event, data=event_data)
-        if serialized_event.is_valid():
-            serialized_event.save()
-            return JsonResponse(serialized_event.data)
-        return JsonResponse(serialized_event.errors, status=400)
+        try:
+            event_data = JSONParser().parse(request)
+            serialized_event = EventSerializer(event, data=event_data)
+            if serialized_event.is_valid():
+                serialized_event.save()
+                return JsonResponse(serialized_event.data)
+            return JsonResponse(serialized_event.errors, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
 
     elif request.method == 'DELETE':
-        event.delete()
-        return JsonResponse({'message': 'Event deleted successfully'}, status=204)
+        try:
+            event.delete()
+            return JsonResponse({'message': 'Event deleted successfully'}, status=204)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+

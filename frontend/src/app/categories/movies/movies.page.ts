@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class MoviesPage implements OnInit {
 
   events: any[] = [];
 
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private router:Router) { }
 
   ngOnInit(): void {
     this.fetchMoviesEvents();
@@ -27,5 +28,10 @@ export class MoviesPage implements OnInit {
         }
       );
   }
+
+  navigateToEventDetails(eventId: number) {
+    this.router.navigate(['/event-details', eventId]); // Navigate to event-details page with event ID
+  }
+
 
 }

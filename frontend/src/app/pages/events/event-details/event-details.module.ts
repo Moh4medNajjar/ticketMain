@@ -8,10 +8,12 @@ import { EventDetailsPageRoutingModule } from './event-details-routing.module';
 
 import { EventDetailsPage } from './event-details.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   imports: [
+    HttpClientModule,
     CommonModule,
     SharedModule,
     FormsModule,

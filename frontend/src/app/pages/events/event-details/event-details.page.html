@@ -2,35 +2,42 @@
 <div class="container-fluid p-0"  style="background-color: #1E1B1B; height:100%; color:white; overflow-y:scroll">
 
   <div class="event-image" style="background-image: url(../../../../assets/ev6.png);">
-    <div class="d-flex justify-content-end">
-      <i class="fa-solid fa-heart fs-3"></i>
+    <div class="d-flex justify-content-between">
+      <i class="fa-solid fa-arrow-left-long fs-3"></i>
+      <i class="fa-solid fa-heart fs-3" (click)="addToWishlistClicked()" [style.color]="addToWishlistButtonClicked ? '#F92D75' : '#FFFFFF'"></i>
     </div>
   </div>
 
-  <div class="bottom-container mt-3" style="padding: 10px 20px;">
+  <div class="bottom-container mt-3" style="padding: 10px 20px;" *ngIf="foundEvent">
 
     <div class="event-header">
-      <h2 class="mb-4" style="font-weight: 700;">Royal Hall Concert</h2>
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <h2 style="font-weight: 700;">{{foundEvent.title}}</h2>
+        <i class="fa-solid fa-cart-plus fs-3 add" (click)="addToCartClicked()" [style.color]="addToCartButtonClicked ? '#5AD955' : '#FFFFFF'"></i>
+      </div>
       <div class="d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center justify-content-start">
-          <i class="fa-solid fa-calendar-days me-3" style="font-size:20px"></i>
+          <i class="fa-solid fa-calendar-days me-3" style="font-size:23px"></i>
           <div class="det">
-            <p style="font-weight: 200;">June 22, 2024</p>
+            <p style="font-weight: 300;">{{ foundEvent.date | date:'mediumDate' }}</p>
           </div>
         </div>
-        <div><span>4:00 PM - 6:00 PM</span></div>
+        <div class="d-flex align-items-center justify-content-start">
+          <i class="fa-solid fa-clock me-2" style="font-size:20px"></i>
+          <span>{{ foundEvent.launch_time.slice(0, 5) }}</span>
+        </div>
       </div>
     </div>
-    <p style="font-weight: 500; font-size:15px" class="mt-3"><i class="fa-solid fa-location-dot me-3" style="font-size:20px"></i>Main concert hall, Monastir</p>
+    <p style="font-weight: 500; font-size:15px" class="mt-3"><i class="fa-solid fa-location-dot me-3" style="font-size:20px"></i>{{foundEvent.location}}</p>
 
     <div class="d-flex justify-content-start align-items-center mt-3">
       <i class="fa-solid fa-layer-group me-3" style="font-size:20px"></i>
-      <span style="font-weight: 400;">Age category:</span><span class="ms-2" style="font-size:18px; font-weight: 600;">Family friendly</span>
+      <span style="font-weight: 400;">Age category:</span><span class="ms-2" style="font-size:18px; font-weight: 600;">{{foundEvent.age_category}}</span>
     </div>
 
     <div class="mt-3">
       <h3 class="mb-2" style="font-weight: 600;">About</h3>
-      <p style="font-weight: 100; font-size:14px">The energy crackles in the air as the anticipation builds. The city lights outside pulse in rhythm with the excited chatter echoing through the cavernous venue. Tonight, the air vibrates with the promise of an unforgettable experience - the "Electric Night" concert.</p>
+      <p style="font-weight: 100; font-size:16px">{{foundEvent.description}}</p>
     </div>
 
     <div class="mt-3">
@@ -51,20 +58,16 @@
       <h3 class="mb-2" style="font-weight: 600;">Tickets</h3>
       <div class="d-flex justify-content-start align-items-center mt-3">
         <i class="fa-solid fa-ticket me-3" style="font-size:20px"></i>
-        <span style="font-weight: 400;">N° of tickets sold:</span><span class="ms-2" style="font-size:18px; font-weight: 600;">135</span><span class="dot"><i class="fa-solid fa-circle ms-2" style="color:#44D81C; font-size:14px"></i></span><span style="margin-left:10px" class="text-danger">(15 left)</span>
+        <span style="font-weight: 400;">N° of places:</span><span class="ms-2" style="font-size:18px; font-weight: 600;">{{foundEvent.available_tickets}}</span><span class="dot"><i class="fa-solid fa-circle ms-2" style="color:#44D81C; font-size:14px"></i></span><span style="margin-left:10px" class="text-danger">({{calculateTicketsLeft()}} sold)</span>
 
       </div>
     </div>
 
 
     <div class="button d-flex justify-content-center mt-5 mb-2" style="margin:0 auto">
-      <i class="fa-solid fa-cart-plus me-2 fs-5"></i>
+      <i class="fa-solid fa-basket-shopping fs-5"></i>
+      <span class="mx-3 fs-5 mb-1" style="font-weight: 100;">|</span>
       <span class="fs-5" style="font-weight: 500;">Book Now</span>
-    </div>
-    <p class="text-center my-0">Still shopping?</p>
-    <div class="button2 d-flex justify-content-center mt-2" style="margin:0 auto; margin-bottom:70px">
-      <i class="fa-solid fa-plus me-2 fs-5 mt-1"></i>
-      <span class="fs-5" style="font-weight: 500;">Add to cart</span>
     </div>
 
 
