@@ -59,10 +59,17 @@ class UserLoginAPIView(APIView):
             print("User data:", user.__dict__)
             # Token payload
             payload = {
-                'email': user.email,
-                'username': user.username,
-                'password': user.password,
+            'id': user.pk,    
+            'email': user.email,
+            'username': user.username,
+            'age': user.age,
+            'field_of_interest': user.field_of_interest,
+            'phone': user.phone,
+            'governorate': user.governorate,
+            'is_verified': user.is_verified,
+            'is_admin': user.is_admin
             }
+
 
             # Generate JWT token
             token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')

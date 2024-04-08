@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
+import {CartService} from "../../../services/cart.service";
 
 @Component({
   selector: 'app-event-details',
@@ -19,7 +21,7 @@ export class EventDetailsPage implements OnInit {
   addToWishlistButtonClicked: boolean = false;
   showMessage: boolean = false;
   message_displayed!: string
-  constructor(private activatedRoute: ActivatedRoute, private eventService: EventService) { }
+  constructor(private activatedRoute: ActivatedRoute, private eventService: EventService, private cartService: CartService, private router: Router) { }
 
   ngOnInit(): void {
     // Get the eventId from the route parameters
@@ -56,6 +58,34 @@ export class EventDetailsPage implements OnInit {
 
   addToCartClicked() {
     this.addToCartButtonClicked = !this.addToCartButtonClicked;
+
+    if (this.addToCartButtonClicked) {
+      // Add event to cart using CartService
+      const cartData = {
+        // Include necessary data for adding to cart (e.g., event ID, quantity)
+        event: this.foundEvent.id,
+        quantity: 1, // Assuming adding 1 ticket by default
+      };
+
+      this.cartService.addToCart(cartData).subscribe(
+        (response) => {
+          console.log('Event added to cart:', response);
+          this.message_displayed = 'Added to Cart!';
+          this.showMessage = true;
+          setTimeout(() => {
+            this.showMessage = false;
+          }, 2000);
+        },
+        (error) => {
+          console.error('Error adding event to cart:', error);
+          this.message_displayed = 'Error adding to cart!';
+          this.showMessage = true;
+          setTimeout(() => {
+            this.showMessage = false;
+          }, 2000);
+        }
+      );
+    }
   }
 
   toggleWishlist() {
@@ -82,6 +112,11 @@ export class EventDetailsPage implements OnInit {
       return '#45d81cd4'; // Default background color (transparent)
     }
   }
+
+  navigateToBooking() {
+  // Navigate to the event-booking page
+  this.router.navigate(['/book-event']);
+}
 
 
 
