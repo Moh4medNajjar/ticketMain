@@ -1,40 +1,27 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 import { UserService } from 'src/app/services/user.service';
+
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.page.html',
-  styleUrls: ['./home-page.page.scss'],
-  providers: [UserService]
+  selector: 'app-bookedevents',
+  templateUrl: './bookedevents.page.html',
+  styleUrls: ['./bookedevents.page.scss'],
 })
-export class HomePagePage implements OnInit {
+export class BookedeventsPage implements OnInit {
+
   bookedEvents: any[] = [];
   userId: any;
   ticketsList!: any[];
-  events: any[] = [];
+
+  constructor(private eventService: EventService, private router: Router, private userService: UserService) {}
 
 
-  constructor(private eventService: EventService, private router:Router, public UserService: UserService) { }
   ngOnInit(): void {
-    console.log('User ID:', this.userId);
-    this.fetchEvents();
-    this.userId = this.UserService.getUserDataFromToken();
+    this.userId = this.userService.getUserDataFromToken();
     this.ticketsList = this.userId.tickets;
+    console.log(this.ticketsList);
     this.fetchBookedEvents();
-  }
-
-  fetchEvents(): void {
-    this.eventService.getEvents()
-      .subscribe(
-        (events: any[]) => {
-          this.events = events;
-          console.log('Events:', this.events);
-        },
-        (error: any) => {
-          console.error('Error fetching events:', error);
-        }
-      );
   }
 
   fetchBookedEvents(): void {
@@ -51,15 +38,9 @@ export class HomePagePage implements OnInit {
       );
   }
 
-
-
-
-
   navigateToEventDetails(eventId: number) {
     this.router.navigate(['/event-details', eventId]); // Navigate to event-details page with event ID
   }
-
-
 
 
 }

@@ -68,7 +68,8 @@ class UserLoginAPIView(APIView):
             'governorate': user.governorate,
             'is_verified': user.is_verified,
             'is_admin': user.is_admin,
-            'cart' : user.cart
+            'cart' : user.cart,
+            'tickets' : user.tickets,
             }
 
 

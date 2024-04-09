@@ -77,7 +77,11 @@ const routes: Routes = [
 
 ,
 
- { path: 'book-event', component: EventBookingPage }
+ { path: 'book-event', component: EventBookingPage },  {
+    path: 'bookedevents',
+    loadChildren: () => import('./pages/bookedevents/bookedevents.module').then( m => m.BookedeventsPageModule)
+  }
+
 
 
 ];
