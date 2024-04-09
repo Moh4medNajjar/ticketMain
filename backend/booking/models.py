@@ -10,3 +10,7 @@ class Booking(models.Model):
     booking_price = models.DecimalField(max_digits=10, decimal_places=2)
     booking_payment_method = models.CharField(max_length=100)
     booking_payment_status = models.CharField(max_length=20)
+
+################1) A user can purchase multiple tickets for the same event
+############ 2) To calculate the number of seats available for the event
+############ we need to keep track of the number of tickets purchased by each user

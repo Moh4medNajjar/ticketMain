@@ -34,3 +34,4 @@ class Event(models.Model):
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, null=True, blank=True)
     age_category = models.CharField(max_length=100, choices=AGE_CATEGORY_CHOICES, null=True, blank=True)
     is_approved = models.BooleanField(default=False)
+

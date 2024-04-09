@@ -37,13 +37,19 @@ class UserStatusAPIView(APIView):
         user = request.user 
         is_admin = user.is_admin  
         return Response({'is_admin': is_admin})
-
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import authenticate
+from django.conf import settings
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+import jwt
 
 class UserLoginAPIView(APIView):
     def post(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
-        
+
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
@@ -51,11 +57,56 @@ class UserLoginAPIView(APIView):
 
         if user is not None and check_password(password, user.password):
             print("User data:", user.__dict__)
-            return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
+            # Token payload
+            payload = {
+            'id': user.pk,    
+            'email': user.email,
+            'username': user.username,
+            'age': user.age,
+            'field_of_interest': user.field_of_interest,
+            'phone': user.phone,
+            'governorate': user.governorate,
+            'is_verified': user.is_verified,
+            'is_admin': user.is_admin,
+            'cart' : user.cart
+            }
+
+
+            # Generate JWT token
+            token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
+            return Response({'token': token}, status=status.HTTP_200_OK)
+            # return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
         else:
             print("Authentication failed for email:", email)
             print("Authentication failed for password:", password)
             return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
+
+
+#
+# class UserLoginAPIView(APIView):
+#     def post(self, request):
+#         email = request.data.get('email')
+#         password = request.data.get('password')
+#
+#         # Authenticate user
+#         user = authenticate(email=email, password=password)
+#
+#         if user is None:
+#             return Response({'error': 'Email or password is incorrect'}, status=status.HTTP_401_UNAUTHORIZED)
+#
+#         # Token payload
+#         payload = {
+#             'email': user.email,
+#             'firstname': user.first_name,
+#             'lastname': user.last_name,
+#             'username': user.username,
+#             'user_id': user.id
+#         }
+#
+#         # Generate JWT token
+#         token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
+#
+#         return Response({'token': token}, status=status.HTTP_200_OK)
 
 class UserListCreateAPIView(APIView):
     def get(self, request):
@@ -111,3 +162,4 @@ class UserRetrieveUpdateDestroyAPIView(APIView):
             return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
         except User.DoesNotExist:
             return Response({"message": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
+

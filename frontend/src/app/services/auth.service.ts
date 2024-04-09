@@ -25,5 +25,5 @@ export class AuthService {
   getUserStatus(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}user/status/`);
   }
-  // You can add more methods here for handling other authentication-related actions, like password reset, etc.
+  
 }
