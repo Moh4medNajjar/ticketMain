@@ -39,14 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'user',
+    'User',
     'superuser', 
     'event', 
-    'ticket', 
-    'booking', 
+
+    
     'feedback', 
     'rating', 
-    'cart', 
+    
     'payment',
 ]
 

@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 
 class User(models.Model):
+    id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=150, unique=True,default="")
     password = models.CharField(max_length=128, default="")
     age = models.PositiveIntegerField(null=True)
@@ -15,7 +16,8 @@ class User(models.Model):
     is_verified = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     cart = models.JSONField()
-    # tickets = models.JSONField()  |||
+    tickets = models.JSONField()  
+    
     #MFA fields
     mfa_enabled = models.BooleanField(default=False) 
     mfa_secret_key = models.CharField(max_length=100, null=True)

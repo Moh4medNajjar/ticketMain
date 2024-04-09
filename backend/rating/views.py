@@ -1,6 +1,9 @@
+import json
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseBadRequest
 from django.http import JsonResponse
+
+from .models import Event
 from .models import Rating
 from django.contrib.auth.decorators import login_required
 

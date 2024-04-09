@@ -1,6 +1,6 @@
 import logging
 from django.db import models
-from user.models import User
+from User.models import User
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

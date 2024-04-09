@@ -1,6 +1,6 @@
 from event.models import Event
 from django.db import models
-from user.models import User
+from User.models import User
 
 class Feedback(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
