@@ -67,7 +67,8 @@ class UserLoginAPIView(APIView):
             'phone': user.phone,
             'governorate': user.governorate,
             'is_verified': user.is_verified,
-            'is_admin': user.is_admin
+            'is_admin': user.is_admin,
+            'cart' : user.cart
             }
 
 
