@@ -8,94 +8,42 @@
   </div>
 
   <div class="d-flex justify-content-between align-items-center mt-5">
-    <span style="font-size:18px; font-weight: 600; color: rgba(182, 170, 170, 0.625);">2 items</span>
+    <span style="font-size:18px; font-weight: 600; color: rgba(182, 170, 170, 0.625);"> {{this.cartEvents.length}} items</span>
     <span class="text-danger" style="font-size:18px; font-weight: 500; ">Remove all</span>
   </div>
   <div class="mt-2 mb-4" style="height: 0.1px; background-color: rgba(202, 188, 188, 0.522); border-radius: 100px;"></div>
 
   <div class="cart-events">
-    <div class="cart-event d-flex justify-content-start align-items-start mb-2">
-      <img src="../../../../assets/ev4.png" class="me-2 mt-1" alt="">
-      <div class="left" style="width:100%">
+
+    <div *ngFor="let event of cartEvents" class="cart-event d-flex justify-content-start align-items-start mb-2">
+      <img src="{{ event.imageUrl }}" class="me-2 mt-1" alt="">
+      <div class="left" style="width: 100%;">
         <div class="d-flex align-items-center justify-content-between">
-          <span style="font-weight: 600; font-size: 17px;">Royale Concert</span>
-          <i class="fa-solid fa-trash-can"></i>
+          <span style="font-weight: 600; font-size: 17px;">{{ event.title }}</span>
+          <i class="fa-solid fa-trash-can" (click)="removeEventFromCart(event)"></i>
         </div>
-        <div><span>Tickets: <span style="font-weight: bold;">135</span></span></div>
+        <div><span style="font-weight: 600;">{{ event.ticket_unit_price }} <span style="font-weight: 300;">TND</span></span></div>
         <div class="mt-2 d-flex justify-content-between align-items-center">
-          <span style="font-weight: 600; ">20 <span style="font-weight: 300;">TND</span></span>
+          <span style="font-weight: 600;">{{ calculateTotalPrice(event) }} <span style="font-weight: 300;">TND</span></span>
           <div class="d-flex align-items-center justify-content-center">
-            <i class="fa-regular fa-square-plus fs-4"></i>
-            <div style="height: 30px; width: 30px; border-radius:6px; background-color:rgba(226, 222, 222, 0.181); font-size:20px" class="d-flex justify-content-center align-items-center mx-2"><span style="margin-bottom:4px">2</span></div>
-            <i class="fa-regular fa-square-minus fs-4"></i>
+            <i class="fa-regular fa-square-plus fs-4" (click)="incrementTickets(event)"></i>
+            <div style="height: 30px; width: 30px; border-radius: 6px; background-color: rgba(226, 222, 222, 0.181); font-size: 20px;" class="d-flex justify-content-center align-items-center mx-2">
+              <span style="margin-bottom: 4px;">{{ event.selectedTickets }}</span>
+            </div>
+            <i class="fa-regular fa-square-minus fs-4" (click)="decrementTickets(event)"></i>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="cart-event d-flex justify-content-start align-items-start mb-2">
-      <img src="../../../../assets/ev3.png" class="me-2 mt-1" alt="">
-      <div class="left" style="width:100%">
-        <div class="d-flex align-items-center justify-content-between">
-          <span style="font-weight: 600; font-size: 17px;">Royale Concert</span>
-          <i class="fa-solid fa-trash-can"></i>
-        </div>
-        <div><span>Tickets: <span style="font-weight: bold;">135</span></span></div>
-        <div class="mt-2 d-flex justify-content-between align-items-center">
-          <span style="font-weight: 600; ">20 <span style="font-weight: 300;">TND</span></span>
-          <div class="d-flex align-items-center justify-content-center">
-            <i class="fa-regular fa-square-plus fs-4"></i>
-            <div style="height: 30px; width: 30px; border-radius:6px; background-color:rgba(226, 222, 222, 0.181); font-size:20px" class="d-flex justify-content-center align-items-center mx-2"><span style="margin-bottom:4px">2</span></div>
-            <i class="fa-regular fa-square-minus fs-4"></i>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="cart-event d-flex justify-content-start align-items-start mb-2">
-      <img src="../../../../assets/ev1.png" class="me-2 mt-1" alt="">
-      <div class="left" style="width:100%">
-        <div class="d-flex align-items-center justify-content-between">
-          <span style="font-weight: 600; font-size: 17px;">Royale Concert</span>
-          <i class="fa-solid fa-trash-can"></i>
-        </div>
-        <div><span>Tickets: <span style="font-weight: bold;">135</span></span></div>
-        <div class="mt-2 d-flex justify-content-between align-items-center">
-          <span style="font-weight: 600; ">20 <span style="font-weight: 300;">TND</span></span>
-          <div class="d-flex align-items-center justify-content-center">
-            <i class="fa-regular fa-square-plus fs-4"></i>
-            <div style="height: 30px; width: 30px; border-radius:6px; background-color:rgba(226, 222, 222, 0.181); font-size:20px" class="d-flex justify-content-center align-items-center mx-2"><span style="margin-bottom:4px">2</span></div>
-            <i class="fa-regular fa-square-minus fs-4"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cart-event d-flex justify-content-start align-items-start mb-2">
-      <img src="../../../../assets/ev2.png" class="me-2 mt-1" alt="">
-      <div class="left" style="width:100%">
-        <div class="d-flex align-items-center justify-content-between">
-          <span style="font-weight: 600; font-size: 17px;">Royale Concert</span>
-          <i class="fa-solid fa-trash-can"></i>
-        </div>
-        <div><span>Tickets: <span style="font-weight: bold;">135</span></span></div>
-        <div class="mt-2 d-flex justify-content-between align-items-center">
-          <span style="font-weight: 600; ">20 <span style="font-weight: 300;">TND</span></span>
-          <div class="d-flex align-items-center justify-content-center">
-            <i class="fa-regular fa-square-plus fs-4"></i>
-            <div style="height: 30px; width: 30px; border-radius:6px; background-color:rgba(226, 222, 222, 0.181); font-size:20px" class="d-flex justify-content-center align-items-center mx-2"><span style="margin-bottom:4px">2</span></div>
-            <i class="fa-regular fa-square-minus fs-4"></i>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="payment">
     <div class="mt-4 mb-4" style="height: 0.1px; background-color: rgba(202, 188, 188, 0.522); border-radius: 100px;"></div>
     <div class="d-flex justify-content-between align-items-center">
       <span style="font-weight: 400; font-size:20px; color:rgba(224, 224, 224, 0.611)">Total: </span>
-      <span style="font-weight: 400; font-size:22px">240<span style="font-size:20px; font-weight: 600;"> TND</span></span>
+      <span style="font-weight: 400; font-size:22px">{{ calculateGrandTotal() }}<span style="font-size:20px; font-weight: 600;"> TND</span></span>
     </div>
 
     <div class="button d-flex justify-content-center mt-5">

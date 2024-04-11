@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class EventService {
 
   private eventsUrl = 'http://localhost:8000/events/';
-  private apiUrl = 'http://localhost:8000/events/';
+  private apiUrl = 'http://localhost:8000/events';
 
 
   constructor(private http: HttpClient) { }
@@ -23,7 +23,7 @@ export class EventService {
   }
 
   getEventDetails(eventId: number): Observable<any> {
-    const url = `${this.apiUrl}${eventId}`;
+    const url = `${this.apiUrl}/${eventId}/`;
     return this.http.get<any>(url);
   }
 }

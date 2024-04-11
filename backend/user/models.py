@@ -16,7 +16,23 @@ class User(models.Model):
     is_verified = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     cart = models.JSONField()
-    tickets = models.JSONField()  
+    tickets = models.JSONField() 
+
+    @classmethod
+    def remove_item_from_cart(cls, user_id, item_id):
+        try:
+            user = cls.objects.get(id=user_id)
+            cart_items = user.cart
+
+            if str(item_id) in cart_items:
+                del cart_items[str(item_id)]  # Remove item from cart dictionary
+                user.cart = cart_items
+                user.save()
+                return True
+            else:
+                return False  # Item not found in cart
+        except cls.DoesNotExist:
+            return False  # User not found 
     
     #MFA fields
     mfa_enabled = models.BooleanField(default=False) 

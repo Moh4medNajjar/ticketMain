@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
 export class UserService {
 
   constructor(private http: HttpClient) {}
-
+  baseUrl= "localhost:8000/users"
 
 
   getUserDataFromToken(){
@@ -22,6 +23,11 @@ export class UserService {
         console.error('Error parsing token:', error);
     }
     }
+  }
+
+  removeFromCart(userId: number, eventId: number): Observable<any> {
+    const url = `${this.baseUrl}/${userId}`;
+    return this.http.delete(url);
   }
 
   }
