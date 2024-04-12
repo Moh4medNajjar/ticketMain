@@ -7,34 +7,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./bottom-bar.component.scss'],
 })
 export class BottomBarComponent implements OnInit {
-  activeIcon: string = '';
+  currentRoute: string = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.updateActiveRoute(); // Initialize currentRoute based on the initial route
+    this.router.events.subscribe(() => {
+      this.updateActiveRoute(); // Update currentRoute when route changes
+    });
+  }
 
   ngOnInit() {}
 
-  navigateToPage(pageUrl: string, icon: string): void {
-    console.log(`Navigating to page: ${pageUrl} with icon: ${icon}`);
-
-    // Update color based on current route URL
-    const currentPageUrl = this.router.url;
-    if (currentPageUrl !== pageUrl) {
-      // Update color of all icons
-      const icons = document.querySelectorAll('.icon');
-      icons.forEach((element: Element) => {
-        const iconName = element.getAttribute('name');
-        if (iconName === icon) {
-          element.classList.add('active');
-        } else {
-          element.classList.remove('active');
-        }
-      });
-
-      // Update active icon
-      this.activeIcon = icon;
-
-      // Navigate only if not already on the page
-      this.router.navigateByUrl(pageUrl);
+  navigateTo(route: string): void {
+    if (this.currentRoute !== route) {
+      this.router.navigate([`/${route}`]);
     }
+  }
+
+  updateActiveRoute(): void {
+    const currentUrlTree = this.router.parseUrl(this.router.url);
+    this.currentRoute = currentUrlTree.root.children['primary'] ? currentUrlTree.root.children['primary'].segments[0].path : '';
   }
 }

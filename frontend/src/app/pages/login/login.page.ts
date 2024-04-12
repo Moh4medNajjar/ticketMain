@@ -23,28 +23,28 @@ export class LoginPage implements OnInit {
     });
   }
 
-loginUser() {
-  console.log('Login button clicked');
-  console.log('Form validity:', this.loginForm.valid);
-  if (this.loginForm.valid) {
-    this.authService.login(this.loginForm.value).subscribe(
-      response => {
-        console.log('Login successful', response);
-        console.log('is admin :',response.is_admin);
-        localStorage.setItem('token', response.token); // Store token in local storage
-        if(response.is_admin){
-          this.router.navigate(['./super-user']);
+  loginUser() {
+    console.log('Login button clicked');
+    console.log('Form validity:', this.loginForm.valid);
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value).subscribe(
+        response => {
+          console.log('Login successful', response);
+          localStorage.setItem('token', response.token);
+          const tokenPayload = this.authService.decodeJwtToken(response.token);
+          const isAdmin = tokenPayload.is_admin;
+          if (isAdmin) {
+            this.router.navigate(['./super-user']);
+          } else {
+            this.router.navigate(['./home-page']);
+          }
+        },
+        error => {
+          console.error('Login failed', error);
         }
-        else{
-          this.router.navigate(['./home-page']);
-        }
-      },
-      error => {
-        console.error('Login failed', error);
-        // Handle login error, e.g., display error message
-      }
-    );
+      );
+    }
   }
-}
+
 
 }
