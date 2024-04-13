@@ -17,9 +17,9 @@ export class HomePagePage implements OnInit {
 
   constructor(private eventService: EventService, private router:Router, public UserService: UserService) { }
   ngOnInit(): void {
-    console.log('User ID:', this.userId);
     this.fetchEvents();
     this.userId = this.UserService.getUserDataFromToken();
+    console.log('User:', this.userId);
     this.ticketsList = this.userId.tickets;
     this.fetchBookedEvents();
   }

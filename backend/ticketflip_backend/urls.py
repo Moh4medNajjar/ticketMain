@@ -12,7 +12,10 @@ from rating.views import rating_detail, rating_create, rating_update, rating_del
 
 urlpatterns = [
     path('api/users', UserListCreateAPIView.as_view(), name='user-list-create'),
-    path('api/users/<int:pk>', UserRetrieveUpdateDestroyAPIView.as_view(), name='user-retrieve-update-destroy'),
+    path('api/users/<int:pk>/', UserRetrieveUpdateDestroyAPIView.as_view(), name='user-retrieve-update-destroy'),
+    # path('users/<int:user_id>/cart/<int:item_id>/', UserRetrieveUpdateDestroyAPIView.as_view(), name='user-cart-detail'),
+
+    path('api/users/<int:pk>/', UserRetrieveUpdateDestroyAPIView.as_view(), name='user-retrieve-update-destroy'),
     path('api/auth/register/', UserRegisterAPIView.as_view(), name='user-register'),
     path('api/auth/login/', UserLoginAPIView.as_view(), name='user-login'),
     path('api/auth/user/status/', UserStatusAPIView.as_view(), name='user_status'),

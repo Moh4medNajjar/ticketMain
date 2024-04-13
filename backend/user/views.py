@@ -1,15 +1,17 @@
+from django.db import connection
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserSerializer2
 from django.contrib.auth import authenticate
 import logging
 from django.contrib.auth.hashers import check_password       
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import BasePermission
 from superuser.models import SuperUser
+
 
 class UserRegisterAPIView(APIView):
     def post(self, request):
@@ -45,6 +47,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 import jwt
 
+
+
 class UserLoginAPIView(APIView):
     def post(self, request):
         email = request.data.get('email')
@@ -55,6 +59,10 @@ class UserLoginAPIView(APIView):
         except User.DoesNotExist:
             user = None
 
+        if user is None:
+            print("user is none wtf")
+        if not check_password(password, user.password):
+            print("password is wrong")
         if user is not None and check_password(password, user.password):
             print("User data:", user.__dict__)
             # Token payload
@@ -68,8 +76,8 @@ class UserLoginAPIView(APIView):
             'governorate': user.governorate,
             'is_verified': user.is_verified,
             'is_admin': user.is_admin,
-            'cart' : user.cart,
-            'tickets' : user.tickets,
+            'cart': user.cart, 
+            'ticket': user.tickets,
             }
 
 
@@ -83,31 +91,7 @@ class UserLoginAPIView(APIView):
             return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-#
-# class UserLoginAPIView(APIView):
-#     def post(self, request):
-#         email = request.data.get('email')
-#         password = request.data.get('password')
-#
-#         # Authenticate user
-#         user = authenticate(email=email, password=password)
-#
-#         if user is None:
-#             return Response({'error': 'Email or password is incorrect'}, status=status.HTTP_401_UNAUTHORIZED)
-#
-#         # Token payload
-#         payload = {
-#             'email': user.email,
-#             'firstname': user.first_name,
-#             'lastname': user.last_name,
-#             'username': user.username,
-#             'user_id': user.id
-#         }
-#
-#         # Generate JWT token
-#         token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-#
-#         return Response({'token': token}, status=status.HTTP_200_OK)
+
 
 class UserListCreateAPIView(APIView):
     def get(self, request):
@@ -137,9 +121,16 @@ class UserRetrieveUpdateDestroyAPIView(APIView):
     def put(self, request, pk):
         try:
             user = User.objects.get(pk=pk)
-            serializer = UserSerializer(user, data=request.data)
+            serializer = UserSerializer2(instance= user, data=request.data, partial=True)
             if serializer.is_valid():
+                validated_data = serializer.validated_data
+                print(validated_data)
+                print("***********************************\n")  # Inspect validated data before saving
                 serializer.save()
+                print("***********************************\n")  # Inspect validated data before saving
+                print(serializer.data)  # Print executed queries for debugging
+                print("***********************************\n")  # Inspect validated data before saving
+
                 return Response({"message": "User updated successfully"})
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:
@@ -159,8 +150,20 @@ class UserRetrieveUpdateDestroyAPIView(APIView):
     def delete(self, request, pk):
         try:
             user = User.objects.get(pk=pk)
-            user.delete()
-            return Response({"message": "User deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+
+            # Deserialize request data using CartItemDeletionSerializer
+            serializer = UserSerializer(data=request.data)
+            if serializer.is_valid():
+                item_id = serializer.validated_data['item_id']
+
+                if item_id in user.cart:
+                    user.cart.remove(item_id)
+                    user.save()
+                    return Response({"message": "Item removed from cart"}, status=status.HTTP_200_OK)
+                else:
+                    return Response({"message": "Item not found in cart"}, status=status.HTTP_404_NOT_FOUND)
+            
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
         except User.DoesNotExist:
             return Response({"message": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
-

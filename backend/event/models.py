@@ -23,6 +23,7 @@ class Event(models.Model):
 
     organizer = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
+    # image = models.CharField()
     description = models.TextField()
     location = models.CharField(max_length=255)
     date = models.DateField()

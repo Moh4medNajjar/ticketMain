@@ -21,10 +21,14 @@
 }
 
 input{
-  height: 30px;
+  height: 45px;
+  font-size: 18px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+label{
+  font-size: 18px;
 }
 .button{
   background-color: #6236FF;

@@ -81,7 +81,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ticketflip_backend.wsgi.application'
 
-
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8100',  # Update with your Ionic app's domain
+    # Add other domains as needed
+]
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 

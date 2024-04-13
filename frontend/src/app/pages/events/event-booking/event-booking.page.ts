@@ -21,10 +21,11 @@ export class EventBookingPage implements OnInit {
   userId: any;
   userCart: any;
   cartEvents: CartEvent[] = [];
-
+  user!: any;
   constructor(private userService: UserService, private eventService: EventService) { }
 
   ngOnInit(): void {
+    this.user = this.userService.getUserDataFromToken();
     this.userId = this.userService.getUserDataFromToken().id;
     this.userCart = this.userService.getUserDataFromToken().cart;
 
@@ -73,19 +74,8 @@ export class EventBookingPage implements OnInit {
     return this.cartEvents.reduce((total, event) => total + this.calculateTotalPrice(event), 0);
   }
 
-  removeEventFromCart(event: CartEvent): void {
-    const eventIndex = this.cartEvents.findIndex((cartEvent) => cartEvent.id === event.id);
-    if (eventIndex !== -1) {
-      this.cartEvents.splice(eventIndex, 1); // Remove event from front-end cart
-      this.userService.removeFromCart(this.userId, event.id).subscribe(
-        () => {
-          console.log(`Event with ID ${event.id} removed from cart in database.`);
-        },
-        (error) => {
-          console.error('Error removing event from cart in database:', error);
-          // Handle error (e.g., show a notification)
-        }
-      );
-    }
+  onDeleteItem(itemId: number): void {
+    this.userService.deleteCartItem(this.user, itemId)
   }
+
 }
