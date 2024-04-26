@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backend",
+    "\\frontend",
+    "\\frontend\\src",
+    "\\frontend\\src\\app",
+    "\\frontend\\src\\app\\pages",
+    "\\frontend\\src\\app\\pages\\events",
+    "\\frontend\\src\\app\\pages\\events\\event-booking"
+  ],
+  "SelectedNode": "\\frontend\\src\\app\\pages\\events\\event-booking\\event-booking.page.html",
+  "PreviewInSolutionExplorer": false
+}
